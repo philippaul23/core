@@ -67,6 +67,9 @@ class BaseZhaEntity(LogMixin, entity.Entity):
     def name(self) -> str:
         """Return Entity's default name."""
         if hasattr(self, "_attr_name") and self._attr_name is not None:
+            # The name property can't return DEVICE_CLASS_NAME
+            # the assert satisfies the type checker and will catch attempts
+            # to use DEVICE_CLASS_NAME in the entity descriptions.
             assert self._attr_name is not DEVICE_CLASS_NAME
             return self._attr_name
         return self._name
