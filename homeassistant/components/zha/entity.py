@@ -18,6 +18,7 @@ from homeassistant.helpers.dispatcher import (
     async_dispatcher_connect,
     async_dispatcher_send,
 )
+from homeassistant.helpers.entity import DEVICE_CLASS_NAME
 from homeassistant.helpers.event import async_track_state_change_event
 from homeassistant.helpers.restore_state import RestoreEntity
 
@@ -66,6 +67,7 @@ class BaseZhaEntity(LogMixin, entity.Entity):
     def name(self) -> str:
         """Return Entity's default name."""
         if hasattr(self, "_attr_name") and self._attr_name is not None:
+            assert self._attr_name is not DEVICE_CLASS_NAME
             return self._attr_name
         return self._name
 
