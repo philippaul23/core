@@ -259,8 +259,11 @@ async def async_get_yellow_settings(hass: HomeAssistant) -> dict[str, bool]:
 @api_data
 async def async_set_yellow_settings(
     hass: HomeAssistant, settings: dict[str, bool]
-) -> None:
-    """Set settings specific to Home Assistant Yellow."""
+) -> dict:
+    """Set settings specific to Home Assistant Yellow.
+
+    Returns an empty dict.
+    """
     hassio: HassIO = hass.data[DOMAIN]
     return await hassio.send_command(
         "/os/boards/yellow", method="post", payload=settings
@@ -268,8 +271,11 @@ async def async_set_yellow_settings(
 
 
 @api_data
-async def async_reboot_host(hass: HomeAssistant) -> None:
-    """Reboot the host."""
+async def async_reboot_host(hass: HomeAssistant) -> dict:
+    """Reboot the host.
+
+    Returns an empty dict.
+    """
     hassio: HassIO = hass.data[DOMAIN]
     return await hassio.send_command("/host/reboot", method="post", timeout=60)
 
